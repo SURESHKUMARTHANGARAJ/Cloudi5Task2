@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TalukaSelect from './TalukaSelect';
+import ButtonGroup from '../common/ButtonGroup';
+import TextField from '../common/TextField';
+import StatusToggle from '../common/StatusToggle';
+import TalukaDropdown from './TalukaDropdown';
 
 const TalukaForm = () => {
   const [countries, setCountries] = useState([]);
@@ -132,87 +136,16 @@ const TalukaForm = () => {
       <hr />
 
       <form className='d-flex flex-column gap-3'>
-        {/* Country Select */}
-        <div>
-          <label htmlFor="country">Country Name</label>
-          <select onChange={(e) => setSelectedCountry(e.target.value)}>
-            <option value="">Select Country</option>
-            {countries.map((country) => (
-              <option 
-                key={country._id} 
-                value={country.code} 
-                disabled={!country.isActive}
-              >
-                {country.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* State Select */}
-        <div>
-          <label htmlFor="state">State Name</label>
-          <select onChange={(e) => setSelectedState(e.target.value)}>
-            <option value="">Select State</option>
-            {states.map((state) => (
-              <option 
-                key={state._id} 
-                value={state.code} 
-                disabled={!state.isActive}
-              >
-                {state.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* District Select */}
-        <div>
-          <label htmlFor="district">District Name</label>
-          <select onChange={(e) => setSelectedDistrict(e.target.value)}>
-            <option value="">Select District</option>
-            {districts.map((district) => (
-              <option 
-                key={district._id} 
-                value={district.code} 
-                disabled={!district.isActive}
-              >
-                {district.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="id">ID</label>
-          <input type="text" id="id" value={id} onChange={(e) => setId(e.target.value)} readOnly/>
-        </div>
-
-        <div>
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-        </div>
-
-        <div>
-          <label htmlFor="altname">Alt Name</label>
-          <input type="text" id="altname" value={altName} onChange={(e) => setAltName(e.target.value)} />
-        </div>
-
-        <div>
-          <label htmlFor="status">Status</label>
-          <input type="checkbox" id="status" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
-          <span className='p-3'>isActive</span>
-        </div>
-
-        <div className="buttons d-flex gap-2">
-          <button type="button" onClick={handleGetTaluka}>GET</button>
-          <button type="button" onClick={handleAddTaluka}>ADD</button>
-          <button type="button" onClick={handleUpdateTaluka}>UPDATE</button>
-          <button type="button" onClick={handleDeleteTaluka}>DELETE</button>
-        </div>
+        
+        <TalukaDropdown countries={countries} states={states} districts={districts} setSelectedCountry={setSelectedCountry} setSelectedState={setSelectedState} setSelectedDistrict={setSelectedDistrict} />
+        <TextField label="ID" id="id" value={id} onChange={setId} readOnly />
+        <TextField label="Name" id="name" value={name} onChange={setName} />
+        <TextField label="Alt Name" id="altname" value={altName} onChange={setAltName} />
+        <StatusToggle isActive={isActive} setIsActive={setIsActive} />
+        <ButtonGroup handleAdd={handleAddTaluka} handleDelete={handleDeleteTaluka} handleUpdate={handleUpdateTaluka} handleGet={handleGetTaluka}/>
       </form>
 
-      <TalukaSelect talukas={talukas} />
+      <TalukaSelect talukas={talukas} setName={setName}/>
     </main>
   );
 };

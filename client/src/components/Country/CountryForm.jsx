@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CountrySelect from "./CountrySelect";
+import ButtonGroup from "../common/ButtonGroup";
+import TextField from "../common/TextField";
+import StatusToggle from "../common/StatusToggle";
+import CountrySelect from './CountrySelect'
 
 const CountryForm = () => {
   const [countries, setCountries] = useState([]);
@@ -104,75 +107,20 @@ const CountryForm = () => {
       <hr />
 
       <form className="d-flex flex-column gap-3">
-        <div>
-          <label htmlFor="id">ID </label>
-          <input
-            type="text"
-            id="id"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            readOnly
-          />
-        </div>
-
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="altname">Alt Name</label>
-          <input
-            type="text"
-            id="altname"
-            value={altname}
-            onChange={(e) => setAltname(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="code">Code</label>
-          <input
-            type="text"
-            id="code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="status">Status</label>
-          <input
-            type="checkbox"
-            id="status"
-            checked={isActive}
-            onChange={(e) => setIsActive(e.target.checked)}
-          />
-          <span className="p-3">isActive</span>
-        </div>
-
-        <div className="buttons d-flex gap-2">
-          <button type="button" onClick={handleGet}>
-            GET
-          </button>
-          <button type="button" onClick={handleAdd}>
-            ADD
-          </button>
-          <button type="button" onClick={handleUpdate}>
-            UPDATE
-          </button>
-          <button type="button" onClick={handleDelete}>
-            DELETE
-          </button>
-        </div>
+        <TextField label="ID" id="id" value={id} onChange={setId} readOnly />
+        <TextField label="Name" id="name" value={name} onChange={setName} />
+        <TextField label="Alt Name" id="altname" value={altname} onChange={setAltname} />
+        <TextField label="Code" id="code" value={code} onChange={setCode} />
+        <StatusToggle isActive={isActive} setIsActive={setIsActive} />
+        <ButtonGroup
+          handleAdd={handleAdd}
+          handleDelete={handleDelete}
+          handleUpdate={handleUpdate}
+          handleGet={handleGet}
+        />
       </form>
 
-      <CountrySelect countries={countries} />
+      <CountrySelect countries={countries} setName={setName}/>
     </main>
   );
 };

@@ -19,31 +19,31 @@ const SideNav = () => {
         <img src={logo} alt="Logo"/>
       </div>
       <div className="d-flex justify-content-start align-items-center flex-column">
-        <Link 
+        <Link onClick={changeToggle}
           to='/' 
           className="nav-link"
         >
           <FaHome className="sidenav-icon"/> Master
         </Link>
-        <Link 
+        <Link onClick={changeToggle}
           to='/country' 
         className="nav-link"
         >
           <GiWorld className="sidenav-icon"/> Country
         </Link>
-        <Link 
+        <Link onClick={changeToggle}
           to='/state' 
         className="nav-link"
         >
           <GiIndiaGate className="sidenav-icon"/> State
         </Link>
-        <Link 
+        <Link onClick={changeToggle}
           to='/district' 
         className="nav-link"
         >
           <GiCircleForest className="sidenav-icon"/> District
         </Link>
-        <Link 
+        <Link onClick={changeToggle}
           to='/taluka' 
         className="nav-link"
         >

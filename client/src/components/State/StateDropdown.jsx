@@ -1,25 +1,23 @@
-import React from 'react';
+import React from 'react'
 
-const CountrySelect = ({ countries, setName }) => {
+const StateDropdown = ({countries,setSelectedCountry}) => {
   return (
     <div>
-      <fieldset>
-        <legend>Search Country</legend>
-        <select onChange={(e)=>setName(e.target.value)}>
+          <label htmlFor="country">Country Name</label>
+          <select onChange={(e) => setSelectedCountry(e.target.value)}>
           <option value="">Select Country</option>
           {countries.map((country) => (
             <option 
               key={country._id} 
-              value={country.name} 
+              value={country.code} 
               disabled={!country.isActive} 
             >
               {country.name}
             </option>
           ))}
         </select>
-      </fieldset>
-    </div>
-  );
-};
+        </div>
+  )
+}
 
-export default CountrySelect;
+export default StateDropdown
